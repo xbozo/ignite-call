@@ -1,7 +1,7 @@
 import { Button, Heading, MultiStep, Text, TextInput } from '@ignite-ui/react'
 
 import { useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -35,6 +35,7 @@ export default function Register() {
 	})
 
 	const query = useSearchParams()
+	const router = useRouter()
 
 	useEffect(() => {
 		const username = query.get('username')
@@ -49,6 +50,8 @@ export default function Register() {
 				name: data.name,
 				username: data.username,
 			})
+
+			await router.push('/register/connect-calendar')
 		} catch (err) {
 			if (err instanceof AxiosError && err?.response?.data?.message) {
 				alert(err.response.data.message)
