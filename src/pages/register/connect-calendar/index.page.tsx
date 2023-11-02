@@ -1,9 +1,14 @@
+import { signIn, useSession } from 'next-auth/react'
+
 import { Button, Heading, MultiStep, Text } from '@ignite-ui/react'
+
 import * as CM from '../styles'
 import * as C from './styles'
 import { ArrowRight } from 'phosphor-react'
 
 export default function Register() {
+	const session = useSession()
+
 	return (
 		<CM.Container>
 			<CM.Header>
@@ -25,6 +30,7 @@ export default function Register() {
 					<Button
 						variant="secondary"
 						size="sm"
+						onClick={() => signIn('google')}
 					>
 						Conectar
 						<ArrowRight />
