@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import * as C from './styles';
 import { ArrowRight } from 'phosphor-react';
+import { Form, FormAnnotation } from './styles';
 
 const claimUsernameFormSchema = z.object({
   username: z
@@ -34,12 +34,12 @@ export function ClaimUsernameForm() {
   async function handleClaimUsername(data: ClaimUsernameFormData) {
     const { username } = data;
 
-    await router.push(`/register?username=${username}`);
+    router.push(`/register?username=${username}`);
   }
 
   return (
     <>
-      <C.Form as='form' onSubmit={handleSubmit(handleClaimUsername)}>
+      <Form as='form' onSubmit={handleSubmit(handleClaimUsername)}>
         <TextInput
           size='sm'
           prefix='ignite.com/'
@@ -51,15 +51,15 @@ export function ClaimUsernameForm() {
           Reservar
           <ArrowRight />
         </Button>
-      </C.Form>
-      <C.FormAnnotation>
+      </Form>
+      <FormAnnotation>
         <Text size='sm'>
           {errors.username
             ? errors.username.message
             : 'Digite o nome do usuário desejado'}{' '}
           {/* Essa msg default evita layout shift */}
         </Text>
-      </C.FormAnnotation>
+      </FormAnnotation>
     </>
   );
 }

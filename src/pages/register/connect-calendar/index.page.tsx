@@ -2,10 +2,10 @@ import { signIn, useSession } from 'next-auth/react';
 
 import { Button, Heading, MultiStep, Text } from '@ignite-ui/react';
 
-import * as CM from '../styles';
-import * as C from './styles';
 import { ArrowRight, Check } from 'phosphor-react';
 import { useSearchParams } from 'next/navigation';
+import { Container, Header } from '../styles';
+import { AuthError, ConnectBox, ConnectItem } from './styles';
 
 export default function ConnectCalendar() {
   const session = useSession();
@@ -19,8 +19,8 @@ export default function ConnectCalendar() {
   }
 
   return (
-    <CM.Container>
-      <CM.Header>
+    <Container>
+      <Header>
         <Heading as='strong'>Conecte sua agenda!</Heading>
         <Text>
           Conecte o seu calendário para verificar automaticamente as horas
@@ -28,10 +28,10 @@ export default function ConnectCalendar() {
         </Text>
 
         <MultiStep size={4} currentStep={2} />
-      </CM.Header>
+      </Header>
 
-      <C.ConnectBox>
-        <C.ConnectItem>
+      <ConnectBox>
+        <ConnectItem>
           <Text>Google Calendar</Text>
           {isSignedIn ? (
             <Button size='sm' disabled>
@@ -47,20 +47,20 @@ export default function ConnectCalendar() {
               <ArrowRight />
             </Button>
           )}
-        </C.ConnectItem>
+        </ConnectItem>
 
         {hasAuthError && (
-          <C.AuthError size='sm'>
+          <AuthError size='sm'>
             Falha ao se conectar ao Google. Verifique se você habilitou as
             permissões de acesso ao Google Calendar.
-          </C.AuthError>
+          </AuthError>
         )}
 
         <Button type='submit' disabled={!isSignedIn}>
           Próximo passo
           <ArrowRight />
         </Button>
-      </C.ConnectBox>
-    </CM.Container>
+      </ConnectBox>
+    </Container>
   );
 }

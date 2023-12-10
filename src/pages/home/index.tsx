@@ -1,13 +1,13 @@
 import { Heading, Text } from '@ignite-ui/react';
-import * as C from './styles';
 import Image from 'next/image';
 import previewImage from '@/assets/app-preview.png';
 import { ClaimUsernameForm } from './partials/ClaimUsernameForm';
+import { Container, Hero, Preview } from './styles';
 
 export default function Home() {
   return (
-    <C.Container>
-      <C.Hero>
+    <Container>
+      <Hero>
         <Heading as='h1' size='4xl'>
           Agendamento Descomplicado
         </Heading>
@@ -17,9 +17,9 @@ export default function Home() {
         </Text>
 
         <ClaimUsernameForm />
-      </C.Hero>
+      </Hero>
 
-      <C.Preview>
+      <Preview>
         <Image
           src={previewImage}
           height={400}
@@ -27,7 +27,7 @@ export default function Home() {
           priority
           alt='Calendário simbolizando a aplicação em funcionamento'
         />
-      </C.Preview>
-    </C.Container>
+      </Preview>
+    </Container>
   );
 }

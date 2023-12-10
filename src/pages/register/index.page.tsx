@@ -7,10 +7,10 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import * as C from './styles';
 import { ArrowRight } from 'phosphor-react';
 import { api } from '@/lib/axios';
 import { AxiosError } from 'axios';
+import { Container, Form, FormError, Header } from './styles';
 
 const registerFormSchema = z.object({
   username: z
@@ -67,8 +67,8 @@ export default function Register() {
   }
 
   return (
-    <C.Container>
-      <C.Header>
+    <Container>
+      <Header>
         <Heading as='strong'>Bem-vindo ao Ignite Call!</Heading>
         <Text>
           Precisamos de algumas informações para criar seu perfil! Ah, você pode
@@ -76,9 +76,9 @@ export default function Register() {
         </Text>
 
         <MultiStep size={4} currentStep={1} />
-      </C.Header>
+      </Header>
 
-      <C.Form as='form' onSubmit={handleSubmit(handleRegister)}>
+      <Form as='form' onSubmit={handleSubmit(handleRegister)}>
         <label>
           <Text size='sm'>Nome de usuário</Text>
           <TextInput
@@ -89,7 +89,7 @@ export default function Register() {
           />
 
           {errors.username && (
-            <C.FormError size='sm'>{errors.username.message}</C.FormError>
+            <FormError size='sm'>{errors.username.message}</FormError>
           )}
         </label>
 
@@ -102,7 +102,7 @@ export default function Register() {
           />
 
           {errors.name && (
-            <C.FormError size='sm'>{errors.name.message}</C.FormError>
+            <FormError size='sm'>{errors.name.message}</FormError>
           )}
         </label>
 
@@ -110,7 +110,7 @@ export default function Register() {
           Próximo passo
           <ArrowRight />
         </Button>
-      </C.Form>
-    </C.Container>
+      </Form>
+    </Container>
   );
 }
