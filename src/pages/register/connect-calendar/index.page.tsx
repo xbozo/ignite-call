@@ -7,7 +7,7 @@ import * as C from './styles';
 import { ArrowRight, Check } from 'phosphor-react';
 import { useSearchParams } from 'next/navigation';
 
-export default function Register() {
+export default function ConnectCalendar() {
   const session = useSession();
   const query = useSearchParams();
 
