@@ -1,21 +1,23 @@
-import { signIn, useSession } from 'next-auth/react';
-
 import { Button, Heading, MultiStep, Text } from '@ignite-ui/react';
-
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { ArrowRight, Check } from 'phosphor-react';
-import { useSearchParams } from 'next/navigation';
 import { Container, Header } from '../styles';
 import { AuthError, ConnectBox, ConnectItem } from './styles';
 
 export default function ConnectCalendar() {
   const session = useSession();
-  const query = useSearchParams();
+  const router = useRouter();
 
-  const hasAuthError = !!query.get('error');
-  const isSignedIn = session.status === 'authenticated';
+  const hasAuthError = !!router.query.error;
+  const isSignedId = session.status === 'authenticated';
 
-  async function handleConnectCallendar() {
+  async function handleConnectCalendar() {
     await signIn('google');
+  }
+
+  async function handleNavigateToNextStep() {
+    await router.push('/register/time-intervals');
   }
 
   return (
@@ -33,7 +35,7 @@ export default function ConnectCalendar() {
       <ConnectBox>
         <ConnectItem>
           <Text>Google Calendar</Text>
-          {isSignedIn ? (
+          {isSignedId ? (
             <Button size='sm' disabled>
               Conectado
               <Check />
@@ -42,7 +44,7 @@ export default function ConnectCalendar() {
             <Button
               variant='secondary'
               size='sm'
-              onClick={handleConnectCallendar}>
+              onClick={handleConnectCalendar}>
               Conectar
               <ArrowRight />
             </Button>
@@ -51,12 +53,15 @@ export default function ConnectCalendar() {
 
         {hasAuthError && (
           <AuthError size='sm'>
-            Falha ao se conectar ao Google. Verifique se você habilitou as
-            permissões de acesso ao Google Calendar.
+            Falha ao se conectar ao Google, verifique se você habilitou as
+            permissões de acesso ao Google Calendar
           </AuthError>
         )}
 
-        <Button type='submit' disabled={!isSignedIn}>
+        <Button
+          onClick={handleNavigateToNextStep}
+          type='submit'
+          disabled={!isSignedId}>
           Próximo passo
           <ArrowRight />
         </Button>
