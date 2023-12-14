@@ -39,10 +39,10 @@ export const CalendarActions = styled('div', {
       '&:hover': {
         color: '$gray100',
       },
+    },
 
-      '&:focus': {
-        boxShadow: '0 0 0 2px $colors$gray100',
-      },
+    '&:focus': {
+      boxShadow: '0 0 0 2px $colors$gray100',
     },
   },
 });
