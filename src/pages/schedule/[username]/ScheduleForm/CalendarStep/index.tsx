@@ -6,7 +6,7 @@ import {
   TimePickerItem,
   TimePickerList,
 } from './styles';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import dayjs from 'dayjs';
 import { api } from '@/lib/axios';
 import { useRouter } from 'next/router';
@@ -19,7 +19,6 @@ interface Availability {
 
 export function CalendarStep() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  // const [availability, setAvailability] = useState<Availability | null>(null);
 
   const router = useRouter();
 
@@ -41,7 +40,7 @@ export function CalendarStep() {
     queryFn: async () => {
       const response = await api.get(`/users/${username}/availability`, {
         params: {
-          date: selectedDate,
+          date: selectedDateWithoutTime,
         },
       });
 

@@ -75,10 +75,6 @@ export default async function handler(
     );
   });
 
-  // const formattedBlockedTimes = blockedTimes.map((timeBlock) => {
-  //   return dayjs(timeBlock.date).get('hour');
-  // });
-
   return res.json({
     possibleTimes,
     availableTimes,
