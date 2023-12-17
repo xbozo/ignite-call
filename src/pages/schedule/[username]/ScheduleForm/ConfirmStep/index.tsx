@@ -25,7 +25,7 @@ export function ConfirmStep() {
   });
 
   function handleConfirmScheduling(data: ConfirmFormData) {
-    console.log(data);
+    // console.log(data);
   }
 
   return (
