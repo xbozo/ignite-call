@@ -42,7 +42,21 @@ export default async function handler(
     );
   });
 
+  const blockedDatesRaw = await Prisma.$queryRaw<{ date: Date }[]>`
+    SELECT *
+    FROM 
+      schedulings
+    WHERE schedulings.user_id = ${user.id} 
+      AND DATE_FORMAT(schedulings.date, "%Y-%m") = ${`${year}-${month}`}
+      
+  `;
+
+  const blockedDates = blockedDatesRaw.map((blockedDate) => {
+    return dayjs(blockedDate.date).get('date');
+  });
+
   return res.json({
     blockedWeekDays,
+    blockedDatesRaw,
   });
 }
